@@ -15,7 +15,7 @@ RUN docker-php-ext-install \
 RUN a2enmod rewrite \
     && mkdir -p /app \
     && rm -fr /var/www/html \
-    && ln -s /app/public /var/www/html && chmod -R 777 /app
+    && ln -s /app/public /var/www/html && chmod -R 0777 /app
 	
 # 复制代码到 App 目录
 COPY . /app

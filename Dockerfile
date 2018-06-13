@@ -5,5 +5,12 @@ FROM daocloud.io/php:5.6-apache
 # pdo_mysql 为 PHP 连接 MySQL 扩展
 RUN docker-php-ext-install pdo_mysql
 
+# 开启 URL 重写模块
+# 配置默认放置 App 的目录
+RUN a2enmod rewrite \
+    && mkdir -p /app \
+    && rm -fr /var/www/html \
+    && ln -s /app/public /var/www/html
+	
 # /var/www/html/ 为 Apache 目录
-COPY . /var/www/html/
+COPY . /app

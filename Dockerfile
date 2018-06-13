@@ -10,7 +10,7 @@ RUN docker-php-ext-install pdo_mysql
 RUN a2enmod rewrite \
     && mkdir -p /app \
     && rm -fr /var/www/html \
-    && ln -s /app/public /var/www/html
+    && ln -s /app/public /var/www/html && chmod -R 0777 /app
 	
 # /var/www/html/ 为 Apache 目录
 COPY . /app

@@ -5,7 +5,7 @@ FROM daocloud.io/php:5.6-apache
 # pdo_mysql 为 PHP 连接 MySQL 扩展
 docker-php-ext-install \
         php_gd2 \
-        pdo_mysql \
+        pdo_mysql
 
 # 开启 URL 重写模块
 # 配置默认放置 App 的目录

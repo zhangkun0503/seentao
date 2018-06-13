@@ -3,9 +3,8 @@ FROM daocloud.io/php:5.6-apache
 
 # docker-php-ext-install 为官方 PHP 镜像内置命令，用于安装 PHP 扩展依赖
 # pdo_mysql 为 PHP 连接 MySQL 扩展
-docker-php-ext-install \
-        php_gd2 \
-        pdo_mysql
+docker-php-ext-install php_gd2
+docker-php-ext-install pdo_mysql
 
 # 开启 URL 重写模块
 # 配置默认放置 App 的目录

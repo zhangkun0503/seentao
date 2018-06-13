@@ -42,7 +42,7 @@ class LiveCourses extends IndexBase
         $query['direction'] = 'DESC';
         $query['liveCourseStates'] = 'NOT_START,LIVING';
 
-        $client = new GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $response = $client->post('http://tapi.seentao.com/live/liveCourses.public.list.get', ['query' => $query]);
         $body = json_decode($response->getBody(), true);
 
@@ -65,7 +65,7 @@ class LiveCourses extends IndexBase
             return $cache_data;
         }
 
-        $client = new GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         $response = $client->post('http://tapi.seentao.com/live/audienceLoginUrl.byPublicLiveToken.get', ['query' => ['liveToken' => $token]]);
         $body = json_decode($response->getBody(), true);
 

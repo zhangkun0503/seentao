@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    {php}echo parse_string_val($seo_info, get_defined_vars()){/php}
+    <!--flexible布局-->
+    <script src="__STATIC__/module/live/js/common/flexible.js"></script>
+    <!--公共引用-->
+    <script src="__STATIC__/module/live/js/common/jquery-2.1.4.js"></script>
+    <script src="__STATIC__/module/live/js/common/iscroll.js"></script>
+
+    <link rel="stylesheet" href="__STATIC__/module/live/plug/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/plug/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/common/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/common/common.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/video_detail.css">
+    <script src="__STATIC__/module/live/js/common/tcplayer.js" charset="utf-8"></script>
+</head>
+
+<body>
+    {__NOLAYOUT__}
+    <div class="top">
+       <a href="{:url('index/live/index')}"><img class="logo" src="__STATIC__/module/live/img/common/logo.png"></a>
+       新道云直播
+       <!--<img class="search" src="__STATIC__/module/live/img/common/search.png">-->
+    </div>
+
+    {if condition="$special_info.cc_video_id > 0"}
+    <div class="content">
+        <div class="video_div">
+            {$special_info.play_code}
+        </div>
+        <div class="video_title background">
+            <p class="video_title_title ellipsis">{$special_info.name}</p>
+            <p class="video_title_time"><span>{$special_info.play_count < 10000 ? $special_info.play_count : (($special_info.play_count/10000).'万') }</span> 次播放</p>
+        </div>
+        <div class="video_user background">
+            <img class="video_user_head" src="__STATIC__/module/live/img/detail/user.png">
+            <span>新道云</span>
+            <span class="add_heart" href="javascript:;">
+                +&nbsp;关注
+            </span>
+        </div>
+         <div class="content_div background">
+            <ul class="live_title_div">
+                <li class="live_title_title"><img class="live_img" src="__STATIC__/module/live/img/detail/video_06.png">相关视频</li>
+            </ul>
+             <div class="iscroll">
+                <div class="iscroll_div">
+                    <ul class="iscroll_ul">
+                        {volist name='relation_list' id='vo'}
+                        <a href="{:url('index/live/detail', ['id' => $vo['id']])}">
+                            <li class="scroll_li">
+                                <div class="scroll_dl">
+                                    <div class="scroll_dt"><img src="{$vo.cover_id|get_picture_url}"></div>
+                                    <img class="scroll_dd" src="__STATIC__/module/live/img/common/index_14.png">
+                                </div>
+                                <p class="live_type ellipsis">{$vo.name}</p>
+                                <p class="live_title ellipsis">{$vo.describe}</p>
+                            </li>
+                        </a>
+                        {/volist}
+                    </ul>
+                </div> 
+            </div>
+        </div>
+    </div>
+    {else /}
+    <link rel="stylesheet" href="__STATIC__/module/live/css/picture.css">
+    <div class="padding background content_div">
+        <p class="jourmalism_detail_h4">{$special_info.name}</p>
+        <p class="jourmalism_detail_p1"><span>{$special_info.create_time}</span> 来源：{$special_info.source} </p>
+        {$special_info.content}
+    </div>
+    {/if}
+</body>
+
+
+<!--layui框架.js-->
+<script src="__STATIC__/module/live/plug/layui/layui.js"></script>
+<!--swiper-->
+<script src="__STATIC__/module/live/js/common/swiper.min.js"></script>
+<!-- 本页面js -->
+<script>
+    // CC验证调用函数
+    function get_cc_verification_code() {
+        return '';
+    }
+</script>
+</html>

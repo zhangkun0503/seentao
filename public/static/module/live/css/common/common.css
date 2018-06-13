@@ -1,0 +1,143 @@
+.top {
+	height: 1.37rem;
+	line-height: 1.37rem;
+	font-size: .53rem;
+	text-align: center;
+	position: relative;
+	border-bottom: 1px solid #e2e2e2;
+	background: #fff;
+}
+
+.logo {
+	width: 1.33rem;
+	height: .84rem;
+	position: absolute;
+	left: .32rem;
+	top: .27rem;
+}
+
+.search {
+	float: right;
+	width: .52rem;
+	height: .52rem;
+	position: absolute;
+	right: .32rem;
+	top: .43rem;
+}
+
+html {
+	width: 100%;
+}
+
+body {
+	background: #eef0f2;
+	overflow-x: hidden;
+	width: 100%;
+}
+
+.margin_bottom {
+	margin-bottom: .2rem;
+}
+
+.padding {
+	padding: 0 .32rem;
+}
+
+.background {
+	background: #fff;
+}
+
+.ellipsis {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+.live_title_title {
+	width: 50%;
+	float: left;
+	font-size: .4rem;
+	color: #333;
+	text-align: center;
+	position: relative;
+}
+
+
+.live_img {
+	width: .49rem;
+	height: .38rem;
+	margin:-.1rem  .24rem 0 0;
+}
+
+.iscroll {
+	height: 4.5rem;
+    overflow: hidden;
+    padding-left: .32rem;
+}
+
+.iscrolls {
+	padding-left: .32rem;
+}
+
+.scroll_li {
+	display: inline-block;
+	margin-right: .24rem;
+	width: 4.46rem;
+}
+
+.iscroll_ul a {
+	display: inline-block;
+	width: 4.46rem;
+}
+
+.scroll_dl {
+	width: 100%;
+	position: relative;
+}
+
+.scroll_dt {
+	width: 100%;
+	height: 2.84rem;
+}
+
+.scroll_dt img {
+	width: 100%;
+	height: 100%;
+}
+
+.scroll_dd {
+	height: .48rem;
+	width: .48rem;
+	position: absolute;
+	left: .24rem;
+	bottom: .24rem;
+}
+
+
+.iscroll_ul {
+	white-space: nowrap;
+}
+
+.iscroll_div {
+	width: 100%;
+	overflow: auto;
+	padding-bottom: .43rem;
+}
+
+
+.live_type {
+	height: .83rem;
+	font-size: .36rem;
+	line-height: .83rem;
+}
+
+.live_title {
+	height: .32rem;
+	line-height: .32rem;
+	font-size: .32rem;
+}
+
+
+

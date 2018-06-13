@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="full-screen" content="yes">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    {php}echo parse_string_val($seo_info, get_defined_vars()){/php}
+    <!--flexible布局-->
+    <script src="__STATIC__/module/live/js/common/flexible.js"></script>
+    <!--公共引用-->
+    <script src="__STATIC__/module/live/js/common/jquery-2.1.4.js"></script>
+    <script src="__STATIC__/module/live/js/common/iscroll.js"></script>
+
+    <link rel="stylesheet" href="__STATIC__/module/live/plug/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/plug/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/common/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/common/common.css">
+    <link rel="stylesheet" href="__STATIC__/module/live/css/index.css">
+</head>
+
+<body>
+    {__NOLAYOUT__}
+    <div class="top">
+       <a href="{:url('index/live/index')}"><img class="logo" src="__STATIC__/module/live/img/common/logo.png"></a>
+       新道云直播
+       <!--<img class="search" src="__STATIC__/module/live/img/common/search.png">-->
+    </div>
+
+    <div class="content">
+        <!-- swiper -->
+        <div class="swiper-div margin_bottom">
+            <div class="swiper-container">
+                <div class="swiper-wrapper swiper-wrappers">
+                    {volist name='banner_list' id='vo'}
+                    <div class="swiper-slide swiper-slides">
+                      <a class="banner_link" href="{$vo.url}" title="{$vo.name}"><img class="banner_img" src="{$vo.img_id|get_picture_url}" align="{$vo.name}"></a>
+                    </div>
+                    {/volist}
+                </div>
+                <div class="swiper-pagination" style=""></div>
+            </div>  
+        </div>
+
+        <div class="content_div background margin_bottom">
+            <div class="content_title padding"><img class="hot_title" src="__STATIC__/module/live/img/index/index_07.png">热门视频</div>
+            <div class="iscroll">
+                <div class="iscroll_div">
+                    <ul class="iscroll_ul">
+                        {volist name='recommend_list' id='vo'}
+                        <a href="{:url('index/live/detail', ['id' => $vo['id']])}">
+                            <li class="scroll_li">
+                            <div class="scroll_dl">
+                                <div class="scroll_dt"><img src="{$vo.cover_id|get_picture_url}"></div>
+                                <img class="scroll_dd" src="__STATIC__/module/live/img/common/index_14.png">
+                            </div>
+                            <p class="live_type ellipsis">{$vo.name}</p>
+                            <p class="live_title ellipsis">{$vo.describe}</p>
+                        </li>
+                        </a>
+                        {/volist}
+                    </ul>
+                </div> 
+            </div>
+        </div>
+
+        <div class="content_div background content_divs">
+            <ul class="live_title_div">
+                <li class="live_title_title select_live_type"><img class="live_img" src="__STATIC__/module/live/img/index/live011.png">直播
+                    <p></p>
+                </li> 
+                <li class="live_title_title"><img class="belong_img" src="__STATIC__/module/live/img/index/live02.png">专题
+                    <p></p>
+                </li>
+            </ul>
+            <div class="iscrolls  iscrolls_belong">
+                <div class="swiper-container02">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide scroll_li_live scroll_li_live_select" onclick="get_special_list('0');">全部</div>
+                      {volist name='category_list' id='vo'}
+                      <div class="swiper-slide scroll_li_live" onclick="get_special_list('{$vo.id}');">{$vo.name}</div>
+                      {/volist}
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+           <ul class="content_div background padding live_lists live_div live_courses_lsit">
+               {assign name="status_color" value="$st = ['NOT_START'=>1, 'LIVING'=>2, 'LIVE_END'=>3]" /}
+               {volist name='live_courses.liveCourses' id='vo'}
+                <a href="JavaScript:_redirect('{$vo.audienceToken}');">
+                    <li class="newway_list">
+                        <div class="newway_img_div">
+                            <img src="{$vo.liveCourseLogoUrl}">
+                            <p class="live_status status_color{$status_color[$vo['liveCourseState']]}">{$live_states[$vo['liveCourseState']]}</p>
+                            <p class="live"><span></span>直播</p>
+                        </div>
+                        <div class="live_detail">
+                            <p class="live_detail_title1 ellipsis">{$vo.liveCourseName}</p>
+                            <p class="live_detail_title2 ellipsis">{$vo.createTime|date="Y-m-d H:i",###}</p>
+                        </div>
+                    </li>
+                </a>
+               {/volist}
+            </ul>
+
+            <ul class="content_div background padding live_lists live_lists_other special_list">
+                {volist name='special_list' id='vo'}
+                <a href="{:url('index/live/detail', ['id' => $vo['id']])}">
+                    <li class="clear belong_list">
+                        <div class="belong_left">
+                            <img class="belong_left_img1" src="{$vo.cover_id|get_picture_url}">
+                            <img class="belong_img_img" src="__STATIC__/module/live/img/detail/live_img.png">
+                        </div>
+                        <div class="belong_right">
+                            <p class="belong_right01 ellipsis">{$vo.name}</p>
+                            <p class="belong_right02 ellipsis">{$vo.describe}</p>
+                            <p class="belong_right03 ellipsis">{$vo.create_time}</p>
+                        </div>
+                    </li>
+                </a>
+                {/volist}
+            </ul>
+    </div>
+
+</body>
+
+
+<!--layui框架.js-->
+<script src="__STATIC__/module/live/plug/layui/layui.js"></script>
+<!--swiper-->
+<script src="__STATIC__/module/live/js/common/swiper.min.js"></script>
+<!-- 本页面js -->
+<script id="live_courses" type="text/html">
+    {{#  layui.each(d.list, function(index, item){ }}
+    <a href="JavaScript:_redirect('{{ item.audienceToken }}');">
+        <li class="newway_list">
+            <div class="newway_img_div">
+                <img src="{{ item.liveCourseLogoUrl }}">
+                <p class="live_status status_color{{ status_color[item.liveCourseState]}}">{{ live_states[item.liveCourseState]}}</p>
+                <p class="live"><span></span>直播</p>
+            </div>
+            <div class="live_detail">
+                <p class="live_detail_title1 ellipsis">{{ item.liveCourseName }}</p>
+                <p class="live_detail_title2 ellipsis">{{ item.createTime }}</p>
+            </div>
+        </li>
+    </a>
+    {{#  }); }}
+</script>
+<script id="special_list" type="text/html">
+    {{#  layui.each(d.list, function(index, item){ }}
+    <a href="{{ item.url }}">
+        <li class="clear belong_list">
+            <div class="belong_left">
+                <img class="belong_left_img1" src="{{ item.cover_id }}">
+                <img class="belong_img_img" src="__STATIC__/module/live/img/detail/live_img.png">
+            </div>
+            <div class="belong_right">
+                <p class="belong_right01 ellipsis">{{ item.name }}</p>
+                <p class="belong_right02 ellipsis">{{ item.describe }}</p>
+                <p class="belong_right03 ellipsis">{{ item.create_time }}</p>
+            </div>
+        </li>
+    </a>
+    {{#  }); }}
+</script>
+
+<script>
+    layui.use(['layer', 'laytpl']);
+
+    var live_states = {$live_states|json_encode};
+    var status_color = {$status_color|json_encode};
+
+    // 跳转直播间
+    function _redirect(token) {
+        $.ajax({
+            type: "POST",
+            url: "{:url('index/live/get_live_url')}",
+            data: {'token': token},
+            success: function(json){
+                if(json.code != 0){
+                    layui.layer.msg(json.msg);
+                }else if(json.data.live_url == ''){
+                    layui.layer.msg('直播地址获取失败，请刷新重试');
+                }else{
+                    layui.layer.msg('进入直播间', {
+                        time: 1500
+                    }, function(){
+                        window.location.href = json.data.live_url+"&autoLogin=true&viewername=游客&viewertoken="+token;
+                    });
+                }
+            }
+        });
+    }
+
+    var mySwiper = new Swiper ('.swiper-container', {
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        initialSlide: 0,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        onSlideChangeEnd: function (swiper) {
+            swiper.update();
+            mySwiper.startAutoplay();
+            mySwiper.reLoop();
+        },
+        pagination: {
+            el: '.swiper-pagination',
+           // clickable: true,
+        },
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        followFinger: false
+    
+    });
+
+     var mySwiper2 = new Swiper ('.swiper-container02', {
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,//修改swiper的父元素时，自动初始化swiper
+        onSlideChangeEnd: function (swiper) {
+            swiper.update();
+            mySwiper.startAutoplay();
+            mySwiper.reLoop();
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        slidesPerView: 3,
+        spaceBetween: 30,
+        freeMode: true,
+    });
+
+    var live_type = 0;
+    window.onload = function ()  {
+        $(".live_title_title").on("click", function () {
+            live_type = $(this).index();
+            var index = $(this).index()+1;
+            $(this).find("img").attr("src", "__STATIC__/module/live/img/index/live0"+index+"1.png");
+
+            if (index==1) {
+                $(".live_title_title").eq(0).find("img").attr("src", "__STATIC__/module/live/img/index/live011.png");
+                $(".live_title_title").eq(1).find("img").attr("src", "__STATIC__/module/live/img/index/live02.png");
+                $(".iscrolls").hide();
+                $(".live_div").show();
+                $(".live_lists_other").hide();
+            } else {
+                $(".live_title_title").eq(0).find("img").attr("src", "__STATIC__/module/live/img/index/live01.png");
+                $(".live_title_title").eq(1).find("img").attr("src", "__STATIC__/module/live/img/index/live021.png");
+                $(".iscrolls").show();
+                $(".live_div").hide();
+                $(".live_lists_other").show();
+            }
+
+            $(this).addClass("select_live_type").siblings().removeClass("select_live_type");
+        })
+
+        animate($(".swiper-container02"));
+
+        function animate (obj) {
+            obj.find(".scroll_li_live").on("click", function() {
+                if ($(this).index()>1) {
+                    obj.find(".swiper-pagination-bullet").eq( parseInt($(this).index(),10)-2).click();
+                } else {
+                    obj.find(".swiper-pagination-bullet").eq(0).click();
+                }
+
+                $(this).addClass("scroll_li_live_select").siblings().removeClass("scroll_li_live_select");
+            })
+        }
+    };
+
+    //文档高度
+    function getDocumentTop() {
+        var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+        if (document.body) {
+            bodyScrollTop = document.body.scrollTop;
+        }
+        if (document.documentElement) {
+            documentScrollTop = document.documentElement.scrollTop;
+        }
+        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+        return scrollTop;
+    }
+
+    //可视窗口高度
+    function getWindowHeight() {
+        var windowHeight = 0;    if (document.compatMode == "CSS1Compat") {
+            windowHeight = document.documentElement.clientHeight;
+        } else {
+            windowHeight = document.body.clientHeight;
+        }
+        return windowHeight;
+    }
+
+    //滚动条滚动高度
+    function getScrollHeight() {
+        var scrollHeight = 0, bodyScrollHeight = 0, documentScrollHeight = 0;
+        if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+        }
+        if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+        }
+        scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight;
+        return scrollHeight;
+    }
+
+    var _cid = 0;
+    var _page_l = 1, _page_s = 2;
+    var _allPage_l = 2, _allPage_s = 2;
+    window.onscroll = function () {
+        //监听事件内容
+        if(getScrollHeight() == getWindowHeight() + getDocumentTop()){
+            if (live_type==0) {
+                //直播
+                if(_page_l >= _allPage_l){
+                    layui.layer.msg('真的没有啦');
+                    return false;
+                }
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "{:url('index/live/get_live_courses')}",
+                    data: {'page': _page_l},
+                    success: function(json){
+                        if(json.code == 0 && json.data.liveCourses.length > 0){
+                            var data = {"title":"直播课列表", "list": json.data.liveCourses};
+                            var getTpl = $('#live_courses').html();
+                            layui.laytpl(getTpl).render(data, function(html){
+                                $('.live_courses_lsit').append(html);
+                            });
+                            _page_l ++;
+                            _allPage_l = json.data.allPage;
+                        }
+                    }
+                });
+            } else if (live_type==1) {
+                //专题
+                if(_page_s > _allPage_s){
+                    layui.layer.msg('真的没有啦');
+                    return false;
+                }
+                $.ajax({
+                    async: false,
+                    type: "GET",
+                    url: "{:url('index/live/get_special_list')}",
+                    data: {'page': _page_s, 'cid': _cid},
+                    success: function(json){
+                        if(json.code == 0 && json.data.data.length > 0){
+                            var data = {"title":"专题列表", "list": json.data.data};
+                            var getTpl = $('#special_list').html();
+                            layui.laytpl(getTpl).render(data, function(html){
+                                $('.special_list').append(html);
+                            });
+                            _page_s ++;
+                            _allPage_s = json.data.last_page;
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    // 专题分类切换
+    function get_special_list(cid) {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 10);
+
+        _cid = cid;
+        _page_s = 2;
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "{:url('index/live/get_special_list')}",
+            data: {'page': 1, 'cid': cid},
+            success: function(json){
+                $('.special_list').empty();
+                if(json.code == 0 && json.data.data.length > 0){
+                    var data = {"title":"专题列表", "list": json.data.data};
+                    var getTpl = $('#special_list').html();
+                    layui.laytpl(getTpl).render(data, function(html){
+                        $('.special_list').append(html);
+                    });
+
+                    _allPage_s = json.data.last_page;
+                }
+            }
+        });
+    }
+</script>
+</html>

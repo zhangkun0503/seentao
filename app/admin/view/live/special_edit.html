@@ -1,0 +1,80 @@
+<form action="{:url()}" method="post" class="form_single">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>标题</label>
+                    <span class="">（专题标题名称）</span>
+                    <input class="form-control" id="name" name="name" placeholder="请输入专题标题名称" value="{$info['name']|default=''}" type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>分类</label>
+                    <span class="">（专题分类）</span>
+                    <select id="category_id" name="category_id" class="form-control">
+                        {volist name='special_category_list' id='vo'}
+                        <option value="{$vo['id']}" {notempty name="info['category_id']"}{if condition="$info['category_id'] eq $vo['id']"} selected="selected" {/if}{/notempty} >{$vo['name']}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+            {assign name="cc_video_id" value="$info.cc_video_id|default=''" /}
+            {:widget('bokecc/index', ['name' => 'cc_video_id', 'value' => $cc_video_id])}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>来源</label>
+                    <span class="">（专题来源）</span>
+                    <input class="form-control" id="source" name="source" placeholder="请输入专题来源" value="{$info['source']|default=''}" type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>是否推荐首页</label>
+                    <span>（推荐到云直播首页，注：必须有“视频编号”）</span>
+                    <div>
+                        <label class="margin-r-5"><input type="radio" checked="checked" name="is_recommend"  value="0"> 否</label>
+                        <label><input type="radio" name="is_recommend" value="1"> 是</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>描述</label>
+                    <span class="">（专题描述信息/简介）</span>
+                    <textarea class="form-control" id="describe" name="describe" rows="2" placeholder="请输入专题描述信息/简介">{$info['describe']|default=''}</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>封面图片</label>
+                    <span class="">（请上传单张封面图片）</span>
+                    <br/>
+                    {assign name="cover_id" value="$info.cover_id|default='0'" /}
+                    {:widget('file/index', ['name' => 'cover_id', 'value' => $cover_id, 'type' => 'img'])}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+                <label>专题内容</label>
+                <textarea class="form-control textarea_editor" name="content" placeholder="请输入专题内容">{$info['content']|default=''}</textarea>
+                {:widget('editor/index', array('name'=> 'content','value'=> ''))}
+            </div>
+          </div>
+            
+        </div>
+        
+      <div class="box-footer">
+          
+        <input type="hidden" name="id" value="{$info['id']|default='0'}"/>
+        
+        {include file="layout/edit_btn_group"/}
+        
+      </div>
+        
+      </div>
+      </div>
+</form>
